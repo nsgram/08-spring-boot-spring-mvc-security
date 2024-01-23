@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+	<title>Capgemini home page</title>
+</head>
+<body>
+		<h2>Capgemini Home Page... Yahoo </h2>
+		<hr>
+			<p>
+				Welcome to the capgemini
+			</p>
+			<hr>
+				<p>
+					User:<span sec:authentication="principal.username"></span>
+				<br><br>
+					Roles:<span sec:authentication="principal.authorities"></span>
+				</p>
+			<hr>
+				<div sec:authorize="hasRole('MANAGER')">
+				<p>
+				<a th:href="@{/leaders}">Leadership Meeting</a> (only for manager peeps)
+				</p>
+				
+			<hr>
+			</div>
+			<div sec:authorize="hasRole('ADMIN')">
+				<p>
+				<a th:href="@{/systems}">IT Systems Meeting</a> (only for admin peeps)
+				</p>
+			<hr>
+			</div>
+			<form action="#" th:action="@{/logout}" method="post">
+			<input type="submit" value="Logout"/>
+		</form>
+		
+</body>
+</html>
